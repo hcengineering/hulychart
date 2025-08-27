@@ -1,0 +1,12 @@
+imageTag: s0.7.220
+
+secrets:
+  redisPassword: invalid
+  tokenSecret: invalid
+
+hulypulse:
+  replicaCount: 1
+  imageTag: null
+  redisMode: sentinel
+  redisUrls: 'redis://staging-redis-node-0.staging-redis-headless.redis.svc.cluster.local:26379,redis://staging-redis-node-1.staging-redis-headless.redis.svc.cluster.local:26379,redis://staging-redis-node-2.staging-redis-headless.redis.svc.cluster.local:26379'
+  ingresHost: pulse.hc.engineering

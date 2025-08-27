@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hulypulse
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: {{.Values.hulypulse.ingresHost}}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: hulypulse
+                port:
+                  number: 80

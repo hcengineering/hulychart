@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hulypulse
+spec:
+  replicas: {{.Values.hulypulse.replicaCount}}
+  selector:
+    matchLabels:
+      app: hulypulse
+  template:
+    metadata:
+      labels:
+        app: hulypulse
+        tier: service
+    spec:
+      containers:
+        - name: hulypulse
+          image: hardcoreeng/service_hulypulse:{{coalesce .Values.hulypulse.imageTag .Values.imageTag "latest"}}
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8095
+          env:
+            - name: HULY_TOKEN_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: huly-global
+                  key: tokenSecret
+
+            - name: HULY_REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: huly-global
+                  key: redisPassword
+
+            - name: HULY_REDIS_MODE
+              value: {{.Values.hulypulse.redisMode}}
+
+            - name: HULY_REDIS_URLS
+              value: {{.Values.hulypulse.redisUrls}}
