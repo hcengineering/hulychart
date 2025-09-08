@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hulylake
+spec:
+  replicas: {{.Values.hulylake.replicaCount}}
+  selector:
+    matchLabels:
+      app: hulylake
+  template:
+    metadata:
+      labels:
+        app: hulylake
+        tier: service
+    spec:
+      containers:
+        - name: hulypulse
+          image: hardcoreeng/service_hulylake:{{coalesce .Values.hulylake.imageTag .Values.imageTag "latest"}}
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8096
+          env:
+            - name: HULY_TOKEN_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: huly-global
+                  key: tokenSecret
+
+            - name: HULY_DB_CONNECTION
+              valueFrom:
+                secretKeyRef:
+                  name: huly-global
+                  key: databaseUrl
+
+            - name: HULY_S3_BUCKET
+              value: {{.Values.hulylake.bucket}}
+
+            - name: AWS_ENDPOINT_URL
+              value: {{.Values.hulylake.s3EndpointUrl}}
+
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: hulylake
+                  key: accessKeyId
+
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: hulylake
+                  key: secretAccessKey
+
+            - name: AWS_REGION
+              value: local
+
+

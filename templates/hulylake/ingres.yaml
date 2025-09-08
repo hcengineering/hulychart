@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hulylake
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: {{.Values.hulylake.ingresHost}}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: hulylake
+                port:
+                  number: 80

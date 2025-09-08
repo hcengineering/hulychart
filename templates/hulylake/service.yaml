@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: hulylake
+spec:
+  selector:
+    app: hulylake
+  ports:
+    - port: 80
+      targetPort: 8096
