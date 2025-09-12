@@ -26,6 +26,9 @@ spec:
                   name: huly-global
                   key: tokenSecret
 
+            - name: HULY_HEARTBEAT_TIMEOUT
+              value: "60"
+
             - name: HULY_REDIS_PASSWORD
               valueFrom:
                 secretKeyRef:
