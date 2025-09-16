@@ -15,11 +15,11 @@ spec:
       key: redisSecret
     resources:
       requests:
-        cpu: 101m
-        memory: 128Mi
+        cpu: 100m
+        memory: 512Mi
       limits:
-        cpu: 101m
-        memory: 128Mi
+        cpu: 100m
+        memory: 512Mi
   storage:
     volumeClaimTemplate:
       spec:
@@ -27,4 +27,28 @@ spec:
         resources:
           requests:
             storage: 1Gi
-
+---
+apiVersion: redis.redis.opstreelabs.in/v1beta2
+kind: RedisSentinel
+metadata:
+  name: hulypulse-redis-sentinel
+spec:
+  clusterSize: 3
+  podSecurityContext:
+    runAsUser: 1000
+    fsGroup: 1000
+  redisSentinelConfig:
+    redisReplicationName: hulypulse-redis-replication
+  kubernetesConfig:
+    image: quay.io/opstree/redis-sentinel:v8.0.3
+    imagePullPolicy: IfNotPresent
+    redisSecret:
+      name: hulypulse
+      key: redisSecret
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        cpu: 100m
+        memory: 128Mi
