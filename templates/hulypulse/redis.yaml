@@ -57,6 +57,7 @@ spec:
     fsGroup: 1000
   redisSentinelConfig:
     redisReplicationName: hulypulse-redis
+    masterGroupName: mymaster
   kubernetesConfig:
     image: quay.io/opstree/redis-sentinel:v8.0.3
     imagePullPolicy: IfNotPresent

@@ -14,7 +14,7 @@ spec:
         tier: service
     spec:
       containers:
-        - name: hulypulse
+        - name: hulylake
           image: hardcoreeng/service_hulylake:{{coalesce .Values.hulylake.imageTag .Values.imageTag "latest"}}
           imagePullPolicy: IfNotPresent
           ports:
