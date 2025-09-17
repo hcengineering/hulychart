@@ -34,7 +34,7 @@ spec:
                 secretKeyRef:
                   name: hulypulse
                   key: redisSecret
-            {{- if eq .Values.hulypulse.redisMode1 "replication" }}
+            {{- if eq .Values.hulypulse.redisMode "replication" }}
             - name: HULY_REDIS_MODE
               value: sentinel
 
@@ -42,7 +42,7 @@ spec:
               value: 'redis://hulypulse-redis-sentinel-0.hulypulse-redis-sentinel-headless:26379,redis://hulypulse-redis-sentinel-1.hulypulse-redis-sentinel-headless:26379,redis://hulypulse-redis-sentinel-2.hulypulse-redis-sentinel-headless:26379'
             {{- end }}
 
-            {{- if eq .Values.hulypulse.redisMode1 "standalone" }}
+            {{- if eq .Values.hulypulse.redisMode "standalone" }}
             - name: HULY_REDIS_MODE
               value: direct
 

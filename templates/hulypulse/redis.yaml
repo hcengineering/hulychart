@@ -24,7 +24,7 @@ storage:
           storage: 1Gi
 {{- end -}}
 
-{{- if eq .Values.hulypulse.redisMode1 "replication" }}
+{{- if eq .Values.hulypulse.redisMode "replication" }}
 apiVersion: redis.redis.opstreelabs.in/v1beta2
 kind: RedisReplication
 metadata:
@@ -34,7 +34,7 @@ spec:
 {{ include "redis.spec" . | indent 2 }}
 {{- end }}
 
-{{- if eq .Values.hulypulse.redisMode1 "standalone" }}
+{{- if eq .Values.hulypulse.redisMode "standalone" }}
 apiVersion: redis.redis.opstreelabs.in/v1beta2
 kind: Redis
 metadata:
@@ -45,7 +45,7 @@ spec:
 
 ---
 
-{{- if eq .Values.hulypulse.redisMode1 "replication" }}
+{{- if eq .Values.hulypulse.redisMode "replication" }}
 apiVersion: redis.redis.opstreelabs.in/v1beta2
 kind: RedisSentinel
 metadata:
