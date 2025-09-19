@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hulygram
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: {{.Values.hulygram.ingresHost}}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: hulygram
+                port:
+                  number: 80

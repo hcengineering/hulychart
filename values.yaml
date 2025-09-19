@@ -1,5 +1,7 @@
 baselineTag: invalid
 
+kafkaBootstrapServers: kafka:9092
+
 secrets:
   tokenSecret: invalid
   databaseUrl: invalid
@@ -18,7 +20,7 @@ hulylake:
   imageName: hulylake
   imageTag: null
   ingresHost: lake.hc.engineering
-  s3EndpointUrl: http://192.168.100.100:80
+  s3EndpointUrl: http://s3:80
   bucket: hulylake-staging
   secrets:
     accessKeyId: invalid
@@ -28,3 +30,14 @@ hulykvs:
   replicaCount: 1
   imageName: hulykvs
   imageTag: null
+
+hulygram:
+  imageName: service_hulygram
+  imageTag: latest
+  logLevel: debug
+  ingresHost: telegram.hc.engineering
+  secrets:
+    telegramApiId: invalid
+    telegramApiHash: invalid
+    redisSecret: invalid
+  

@@ -1,0 +1,90 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hulygram
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: hulygram
+  template:
+    metadata:
+      labels:
+        app: hulygram
+        tier: service
+    spec:
+      containers:
+        - name: hulygram
+          image: hardcoreeng/{{.Values.hulygram.imageName}}:{{coalesce .Values.hulygram.imageTag .Values.baselineTag "latest"}} 
+          resources:
+            limits:
+              memory: '256M'
+          imagePullPolicy: Always
+          env:
+            - name: HULY_LOG
+              value: {{.Values.hulygram.logLevel}}
+
+            - name: HULY_BIND_HOST
+              value: 0.0.0.0
+
+            - name: HULY_TOKEN_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: huly-global
+                  key: tokenSecret
+
+            - name: HULY_ACCOUNT_SERVICE
+              value: http://account
+
+            - name: HULY_BLOB_SERVICE_PATH
+              value: http://datalake-service
+
+            - name: HULY_KVS_SERVICE
+              value: http://hulykvs
+
+            - name: HULY_BASE_URL
+              value: https://{{.Values.hulygram.ingresHost}}
+              
+            - name: HULY_TELEGRAM_API_ID
+              valueFrom:
+                secretKeyRef:
+                  name: hulygram
+                  key: telegramApiId
+
+            - name: HULY_TELEGRAM_API_HASH
+              valueFrom:
+                secretKeyRef:
+                  name: hulygram
+                  key: telegramApiHash
+
+            - name: HULY_GET_FILE_RATE_LIMIT
+              value: '4'
+
+            - name: HULY_ALLOWED_DIALOG_IDS
+              value: '4982993114,4937631480,1044298783,1974697595,1501821414,1446378965'
+
+            - name: HULY_KAFKA_BOOTSTRAP
+              value: {{.Values.kafkaBootstrapServers}}
+
+            - name: HULY_OUTBOUND_TX_TOPIC
+              value: hulygun
+
+            - name: HULY_INBOUND_TX_TOPIC
+              value: pg.tx-staging
+
+            - name: HULY_INBOUND_TX_GROUP_ID
+              value: hulygram
+
+            - name: HULY_REDIS_URLS
+              value: 'redis://staging-redis-node-0.staging-redis-headless.redis.svc.cluster.local:26379,redis://staging-redis-node-1.staging-redis-headless.redis.svc.cluster.local:26379,redis://staging-redis-node-2.staging-redis-headless.redis.svc.cluster.local:26379'
+
+            - name: HULY_REDIS_MODE
+              value: 'sentinel'
+
+            - name: HULY_REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: hulygram
+                  key: redisSecret
