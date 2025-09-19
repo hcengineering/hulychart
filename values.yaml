@@ -22,4 +22,7 @@ hulylake:
     accessKeyId: invalid
     secretAccessKey: invalid
 
-
+hulykvs:
+  replicaCount: 1
+  imageName: hulykvs
+  imageTag: null

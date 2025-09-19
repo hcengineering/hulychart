@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hulykvs
+spec:
+  replicas: {{.Values.hulykvs.replicaCount}}
+  selector:
+    matchLabels:
+      app: hulykvs
+  template:
+    metadata:
+      labels:
+        app: hulykvs
+        tier: service
+    spec:
+      containers:
+        - name: hulykvs
+          image: hardcoreeng/{{.Values.hulykvs.imageName}}:{{coalesce .Values.hulykvs.imageTag .Values.baselineTag "latest"}}
+          resources:
+            limits:
+              memory: "64M"
+          ports:
+            - containerPort: 8094
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: HULY_TOKEN_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: huly-global
+                  key: tokenSecret
+            - name: HULY_DB_CONNECTION
+              valueFrom:
+                secretKeyRef:
+                  name: huly-global
+                  key: databaseUrl
