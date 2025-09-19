@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: hulypulse
-          image: hardcoreeng/service_hulypulse:{{coalesce .Values.hulypulse.imageTag .Values.imageTag "latest"}}
+          image: hardcoreeng/{{.Values.hulypulse.imageName}}:{{coalesce .Values.hulypulse.imageTag .Values.baselineTag "latest"}}  
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8095

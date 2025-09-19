@@ -1,4 +1,4 @@
-imageTag: s0.7.220
+baselineTag: invalid
 
 secrets:
   tokenSecret: invalid
@@ -6,6 +6,7 @@ secrets:
 
 hulypulse:
   replicaCount: 1
+  imageName: hulypulse
   imageTag: null
   redisMode: replication
   ingresHost: pulse.hc.engineering
@@ -14,6 +15,7 @@ hulypulse:
 
 hulylake:
   replicaCount: 1
+  imageName: hulylake
   imageTag: null
   ingresHost: lake.hc.engineering
   s3EndpointUrl: http://192.168.100.100:80

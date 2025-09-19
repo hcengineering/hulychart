@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: hulylake
-          image: hardcoreeng/service_hulylake:{{coalesce .Values.hulylake.imageTag .Values.imageTag "latest"}}
+          image: hardcoreeng/{{.Values.hulylake.imageName}}:{{coalesce .Values.hulylake.imageTag .Values.baselineTag "latest"}}
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8096
