@@ -1,6 +1,8 @@
 baselineTag: invalid
-
 kafkaBootstrapServers: kafka:9092
+
+otelMode: "off"
+otelOtlpEndpoint: http://opentelemetry-collector:4317
 
 secrets:
   tokenSecret: invalid
@@ -25,6 +27,7 @@ hulylake:
   secrets:
     accessKeyId: invalid
     secretAccessKey: invalid
+  otelMode: null
 
 hulykvs:
   replicaCount: 1

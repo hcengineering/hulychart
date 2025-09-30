@@ -53,4 +53,6 @@ spec:
             - name: AWS_REGION
               value: local
 
+            {{- include "otel.env" (merge (dict "otelMode" (coalesce .Values.hulylake.otelMode .Values.otelMode)) .) | nindent 12 }}
+
 
