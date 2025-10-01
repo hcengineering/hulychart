@@ -24,7 +24,7 @@ spec:
           imagePullPolicy: Always
           env:
             - name: HULY_LOG
-              value: {{.Values.hulygram.logLevel}}
+              value: {{.Values.hulygram.log}}
 
             - name: HULY_BIND_HOST
               value: 0.0.0.0

@@ -53,6 +53,9 @@ spec:
             - name: AWS_REGION
               value: local
 
+            - name: HULY_LOG
+              value: {{.Values.hulylake.log}}
+
             {{- include "otel.env" (merge (dict "otelMode" (coalesce .Values.hulylake.otelMode .Values.otelMode)) .) | nindent 12 }}
 
 

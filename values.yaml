@@ -24,6 +24,7 @@ hulylake:
   ingresHost: lake.hc.engineering
   s3EndpointUrl: http://s3:80
   bucket: hulylake-staging
+  log: debug
   secrets:
     accessKeyId: invalid
     secretAccessKey: invalid
@@ -37,7 +38,7 @@ hulykvs:
 hulygram:
   imageName: service_hulygram
   imageTag: latest
-  logLevel: debug
+  log: debug
   ingresHost: telegram.hc.engineering
   secrets:
     telegramApiId: invalid
