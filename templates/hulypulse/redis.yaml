@@ -3,7 +3,7 @@ podSecurityContext:
   runAsUser: 1000
   fsGroup: 1000
 kubernetesConfig:
-  image: quay.io/opstree/redis:v8.0.3
+  image: quay.io/opstree/redis:v8.2.1
   imagePullPolicy: IfNotPresent
   redisSecret:
     name: hulypulse
@@ -59,7 +59,7 @@ spec:
     redisReplicationName: hulypulse-redis
     masterGroupName: mymaster
   kubernetesConfig:
-    image: quay.io/opstree/redis-sentinel:v8.0.3
+    image: quay.io/opstree/redis-sentinel:v8.2.1
     imagePullPolicy: IfNotPresent
     redisSecret:
       name: hulypulse
