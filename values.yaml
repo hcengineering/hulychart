@@ -13,6 +13,7 @@ hulypulse:
   imageName: hulypulse
   imageTag: null
   redisMode: replication
+  redisService: mymaster
   ingresHost: pulse.hc.engineering
   secrets:
     redisSecret: invalid
