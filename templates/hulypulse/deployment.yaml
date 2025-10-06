@@ -20,6 +20,9 @@ spec:
           ports:
             - containerPort: 8095
           env:
+            - name: HULY_LOG
+              value: {{ .Values.hulypulse.log  }}
+
             - name: HULY_TOKEN_SECRET
               valueFrom:
                 secretKeyRef:

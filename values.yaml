@@ -12,6 +12,7 @@ hulypulse:
   replicaCount: 1
   imageName: hulypulse
   imageTag: null
+  log: debug
   redisMode: replication
   redisService: mymaster
   ingresHost: pulse.hc.engineering
