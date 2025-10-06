@@ -18,8 +18,11 @@ spec:
           image: hardcoreeng/{{.Values.hulypulse.imageName}}:{{coalesce .Values.hulypulse.imageTag .Values.baselineTag "latest"}}  
           imagePullPolicy: IfNotPresent
           ports:
-            - containerPort: 8095
+            - containerPort: 8099
           env:
+            - name: HULY_BIND_PORT
+              value: "8099"
+
             - name: HULY_LOG
               value: {{ .Values.hulypulse.log  }}
 
