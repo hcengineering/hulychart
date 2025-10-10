@@ -26,6 +26,8 @@ spec:
             - name: HULY_LOG
               value: {{.Values.hulygram.log}}
 
+            {{- include "otel.env" (merge (dict "otelMode" (coalesce .Values.hulygram.otelMode .Values.otelMode)) .) | nindent 12 }}
+
             - name: HULY_BIND_HOST
               value: 0.0.0.0
 

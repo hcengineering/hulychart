@@ -46,4 +46,5 @@ hulygram:
     telegramApiId: invalid
     telegramApiHash: invalid
     redisSecret: invalid
+  otelMode: null
   
