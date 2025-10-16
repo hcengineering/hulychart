@@ -53,5 +53,6 @@ hulygun:
   imageName: hulygun
   imageTag: null
   log: debug
+  otelMode: null
   
   
