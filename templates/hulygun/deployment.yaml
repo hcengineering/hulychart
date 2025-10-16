@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hulygun
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: hulygun
+  template:
+    metadata:
+      labels:
+        app: hulygun
+        tier: service
+    spec:
+      containers:
+        - name: hulygun
+          image: hardcoreeng/{{.Values.hulygun.imageName}}:{{coalesce .Values.hulygun.imageTag .Values.baselineTag "latest"}} 
+          resources:
+            limits:
+              memory: '256M'
+          imagePullPolicy: Always
+          env:
+            - name: HULY_LOG
+              value: {{.Values.hulygun.log}}
+            - name: HULY_TOKEN_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: huly-global
+                  key: tokenSecret
+            - name: HULY_ACCOUNT_SERVICE
+              value: http://account
+            - name: HULY_EXTERNAL_REGIONS
+              value: 'cf'
+            - name: HULY_ACCOUNT_SERVICE_RATE_LIMIT
+              value: '50'
+            - name: HULY_KAFKA_BOOTSTRAP
+              value: {{.Values.kafkaBootstrapServers}}
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: 'https://otlp.uptrace.dev'
+            - name: OTEL_EXPORTER_OTLP_COMPRESSION
+              value: 'gzip'
+            - name: OTEL_EXPORTER_OTLP_HEADERS
+              valueFrom:
+                secretKeyRef:
+                  name: anticrm-secret
+                  key: uptraceDsn
+            - name: OTEL_EXPORTER_OTLP_METRICS_DEFAULT_HISTOGRAM_AGGREGATION
+              value: 'BASE2_EXPONENTIAL_BUCKET_HISTOGRAM'
+            - name: OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE
+              value: 'DELTA'
+
+
+

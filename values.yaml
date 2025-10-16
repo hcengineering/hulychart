@@ -48,5 +48,10 @@ hulygram:
     telegramApiHash: invalid
     redisSecret: invalid
   otelMode: null
+
+hulygun:
+  imageName: service_hulygun
+  imageTag: latest
+  log: debug
   
   
