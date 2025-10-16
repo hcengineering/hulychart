@@ -40,6 +40,7 @@ hulykvs:
 hulygram:
   imageName: service_hulygram
   imageTag: latest
+  pinToNode: null
   log: debug
   ingresHost: telegram.hc.engineering
   secrets:
@@ -47,4 +48,5 @@ hulygram:
     telegramApiHash: invalid
     redisSecret: invalid
   otelMode: null
+  
   

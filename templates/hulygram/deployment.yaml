@@ -15,6 +15,10 @@ spec:
         app: hulygram
         tier: service
     spec:
+      {{- if .Values.hulygram.pinToNode }}
+      nodeName: {{.Values.hulygram.pinToNode}}
+      {{- end }}
+
       containers:
         - name: hulygram
           image: hardcoreeng/{{.Values.hulygram.imageName}}:{{coalesce .Values.hulygram.imageTag .Values.baselineTag "latest"}} 
