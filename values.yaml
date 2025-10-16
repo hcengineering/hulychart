@@ -50,8 +50,8 @@ hulygram:
   otelMode: null
 
 hulygun:
-  imageName: service_hulygun
-  imageTag: latest
+  imageName: hulygun
+  imageTag: null
   log: debug
   
   
