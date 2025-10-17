@@ -83,6 +83,9 @@ spec:
             - name: HULY_INBOUND_TX_GROUP_ID
               value: hulygram
 
+            - name: HULY_MESSAGE_TEARLINE
+              value: '{{.Values.hulygram.messageTearline}}'
+
             - name: HULY_REDIS_URLS
               value: 'redis://staging-redis-node-0.staging-redis-headless.redis.svc.cluster.local:26379,redis://staging-redis-node-1.staging-redis-headless.redis.svc.cluster.local:26379,redis://staging-redis-node-2.staging-redis-headless.redis.svc.cluster.local:26379'
 
