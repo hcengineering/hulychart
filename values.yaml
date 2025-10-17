@@ -48,7 +48,7 @@ hulygram:
     telegramApiHash: invalid
     redisSecret: invalid
   otelMode: null
-  messageTearline: '{first_name} {last_name} via https://huly.io'
+  messageTearline: '[{first_name} {last_name} via https://huly.io]'
 
 hulygun:
   imageName: hulygun
